@@ -1,0 +1,390 @@
+[hidden] {
+    display: none !important;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: url('image/loginBackground.jpg') no-repeat center center fixed;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.page-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.page-heading {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.authentication-container {
+    width: 100%;
+    max-width: 800px;
+    min-height: 520px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px #0000004c;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+
+.left-banner {
+    width: 28%;
+    background-color: #4B6E28;
+    background-image: linear-gradient(180deg, #5b8332 0%, #3e5d20 100%);
+}
+
+.form-package {
+    width: 72%;
+    padding: 30px 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #ffffff;
+}
+
+.form-package.center-content {
+    text-align: center;
+    align-items: center;
+}
+
+.login-wrapper {
+    width: 100%;
+    padding: 30px 20px;
+    background-color: #4B6E28;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-card-inner {
+    background: #ffffff;
+    width: 100%;
+    max-width: 360px;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px #00000026;
+    text-align: center;
+}
+
+.logo-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.logo-block i {
+    font-size: 38px;
+    color: #2E7D32;
+}
+
+.logo-text {
+    text-align: left;
+    line-height: 1.1;
+}
+
+.logo-text h3 {
+    color: #1b4318;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.logo-text span {
+    color: #1b4318;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 14px;
+}
+
+.input-group.no-margin {
+    margin-bottom: 0;
+}
+
+.input-group i.left-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    font-size: 14px;
+}
+
+.input-group i.toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 35px;
+    font-size: 13px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+}
+
+.form-control-simple {
+    width: 100%;
+    padding: 9px 12px;
+    font-size: 13px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+}
+
+.form-control-simple.pr-35 {
+    padding-right: 35px;
+}
+
+.form-control-simple.text-center {
+    text-align: center;
+}
+
+.button-green {
+    width: 100%;
+    background-color: #1A7326;
+    color: #ffffff;
+    border: none;
+    padding: 11px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.button-green:disabled {
+    background-color: #a5d6a7;
+    cursor: not-allowed;
+}
+
+.button-green-small {
+    background-color: #1A7326;
+    color: white;
+    border: none;
+    padding: 9px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.button-olive {
+    width: 100%;
+    background-color: #556B2F;
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.forget-text {
+    width: 100%;
+    background-color: transparent;
+    color: #1A7326;
+    border: 1.5px solid #1A7326;
+    padding: 9px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 20px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.saperator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 15px 0;
+    color: #777;
+    font-size: 12px;
+}
+
+.saperator::before, .saperator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+}
+
+.saperator span {
+    padding: 0 10px;
+}
+
+.link-container {
+    text-align: right;
+    margin-top: 5px;
+}
+
+.step-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.step-circle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1.5px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #666;
+    font-weight: 600;
+}
+
+.step-circle.active {
+    background-color: #1A7326;
+    color: #fff;
+    border-color: #1A7326;
+}
+
+.step-circle.completed {
+    background-color: #2e7d32;
+    color: #fff;
+}
+
+.step-line {
+    width: 40px;
+    height: 2px;
+    background-color: #ccc;
+}
+
+.role-group {
+    display: flex;
+    gap: 18px;
+    margin: 6px 0 12px 0;
+    font-size: 13px;
+}
+
+.role-group label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.form-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.form-row .column {
+    flex: 1;
+}
+
+.field-lable {
+    font-size: 12px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.otp-block {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px dashed #2E7D32;
+}
+
+.otp-input-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.otp-status-text {
+    display: block;
+    font-size: 11px;
+    margin-top: 4px;
+    font-weight: 600;
+}
+
+.otp-status-text.success {
+    color: #2E7D32;
+}
+
+.otp-status-text.error {
+    color: #d32f2f;
+}
+
+.margin-top-10 {
+    margin-top: 10px;
+}
+
+.margin-top-15 {
+    margin-top: 15px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.tractor-icon {
+    font-size: 45px;
+    color: #556B2F;
+    margin-bottom: 10px;
+}
+
+.forget-heading {
+    color: #000;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 2px;
+}
+
+.forget-subtext {
+    color: #666;
+    font-size: 13px;
+    margin-bottom: 25px;
+}
+
+.narrow-form {
+    width: 100%;
+    max-width: 320px;
+}
+
+.margin-bottom-15 {
+    margin-bottom: 15px;
+}
+
+.form-group-margin-large {
+    margin-bottom: 20px;
+}

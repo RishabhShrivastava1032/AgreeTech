@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KrishiEquip - Login Form</title>
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    
+    <!--login page-->
+    <div id="loginPage" class="page-container">
+        <div class="page-heading"> LOGIN PAGE</div>
+        <div class="authentication-container login-wrapper">
+            <div class="login-card-inner">
+                <div class="logo-block">
+                    <i class="fa-solid fa-tractor"></i>
+                    <div class="logo-text">
+                        <h3>Krishi</h3>
+                        <span>Equip</span>
+                    </div>
+                </div>
+
+                <form id="loginForm">
+                    <div class="input-group">
+                        <i class="fa-regular fa-envelope left-icon" ></i>
+                        <input type="text" id="login-email" class="form-control" placeholder="Email / Mobile" required>
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fa-solid fa-lock left-icon" ></i>
+                        <input type="password" id="login-password" class="form-control" placeholder="Password" required>
+                        <i class="fa-regular fa-eye-slash toggle-password" data-target="login-password"></i>
+                    </div>
+                    <button type="submit" class="button-green"> LOGIN</button>
+                    <div class="link-container">
+                        <span class="forget-text" id="goToForgetButton">Forget Password</span>
+                    </div>
+
+                    <div class="saperator"><span>or</span></div>
+                    <button type="button" class="register-button" id="goToRegisterButton"> Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+<!--==============================  Register page  ==============================-->
+<div id="registerPage" class="page-container" hidden>
+    <div class="page-heading" >REGISTER PAGE</div>
+
+    <div class="authentication-container">
+        <div class="left-banner"></div>
+        <div class="form-package">
+            <div class="step-indicator">
+                <div id="step1Circle" class="step-circle active">1</div>
+                <div class="step-line"></div>
+                <div id="step2Circle" class="step-circle">2</div>
+                <div class ="step-line"></div>
+                <div id="step3Circle" class="step-circle">3</div>
+            </div>
+            <form id="registerForm">
+                <!--role selection-->
+                <span class="field-lable">Register as</span>
+                <div class="role-group">
+                    <label> <input type="radio" name = "role" value="Farmer" checked> Farmer </label>
+                    <label> <input type="radio" name = "role" value="Provider"> Provider </label>
+                    <label> <input type="radio" name = "role" value="Admin"> Admin </label>
+                </div>
+
+                <!--full name-->
+                <div class="form-row">
+                    <div class="column">
+                        <span class="field-lable">Full Name</span>
+                        <input type="text" id="full-name" class="form-control-simple" placeholder="Full Name" required> 
+                    </div> 
+
+                    <div class="column">
+                        <span class="field-lable">Location</span>
+                        <select type="text" id="register-location" class="form-control-simple" required> 
+                        <option value="" disabled selected>Select Location</option>
+                        <option value="Indore">Indore</option>
+                        <option value="devas">Devas</option>
+                        <option value="Mhow">Mhow</option>
+                        <option value="pithampur">Pithampur</option>
+                        <option value="ujjain">Ujjain</option>
+                        </select>
+                    </div> 
+                </div>
+                <!--email and mobile number -->
+                <div class="form-row">
+                    <div class="column">
+                        <span class="field-lable">Email Address</span>
+                        <input type="email" id="registerEmail" class="form-control-simple" placeholder="Email Address" required>
+                    </div>
+                    <div class="column">
+                        <span class="field-lable">Mobile Number</span>
+                        <input type="tel" id="registerMobile" class="form-control-simple" placeholder="XXXXXXXXXX" required pattern="[0-9]{10}">
+                    </div>
+                </div>
+                <!--password-->
+                <div class="form-row">
+                    <div class="column">
+                        <span class="field-lable">Create Password</span>
+                        <div class="input-group no-margin">
+                            <input type="password" id="register-password" class="form-control-simple pr-35" placeholder="Create Password" required>
+                            <i class="fa-regular fa-eye-slash toggle-password" data-target="register-password"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Send otp trigger section-->
+                <div id="otpRequestBlock" class="otp-block">
+                    <button type="button" id="otpSendButton" class="button-olive">Send OTP to Mobile/Email</button>
+                </div>
+
+                <!--otp verify section-->
+                <div id="otpVerifyBlock" class="otp-block" hidden>
+                    <span class="field-lable">Enter 6-Digit OTP</span>
+                    <div class="otp-input-row">
+                        <input type="text" id="otpCodeInput" class="form-control-simple text-center" placeholder="Enter OTP" maxlength="6">
+                        <button type="button" id="otpVerifyButton" class="button-green-small">Verify OTP</button>
+                    </div>
+                    <span id="otpStatus" class="otp-status-text"></span>
+                </div>
+
+                <!--Final submit button -->
+                <button type="submit" id="finalRegisterButton" class="button-green margin-top-15" disabled>REGISTER</button>
+                <div class="text-center margin-top-10">
+                    <span class="link-text" id="backToLoginPageButtonRegister">Go to Login Page</span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--==============================  Forget password page  ==============================-->
+<div id="forgetPage" class="page-container" hidden>
+    <div class="page-heading">FORGET PASSWORD PAGE</div>
+    <div class="authentication-container">
+        <div class="left-banner"></div>
+        <div class="form-package center-content">
+            <div class="tractor-icon">
+                <i class="fa-solid fa-tractor"></i>
+            </div>
+            <h3 class="forget-heading">Recover Password</h3>
+            <p class="forget-subtext">Recover access to your account</p>
+
+            <form id="forgetForm" class="narrow-form">
+                <div class="form-group-margin-large">
+                    <input type="text" id="forget-contact" class="form-control-simple text-center" placeholder="Registered Email / Mobile" required>
+                </div>
+
+                <button type="submit" class="button-olive margin-bottom-15">Get OTP</button>
+                <div>
+                    <span class="link-text" id="backToLoginPageButtonForget" >Back to Login Page</span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="login.js"></script>
+</body>
+</html>

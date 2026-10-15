@@ -1,0 +1,27 @@
+{
+  "name": "agretech-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "login.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RishabhShrivastava1032/AgroTech.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/RishabhShrivastava1032/AgroTech/issues"
+  },
+  "homepage": "https://github.com/RishabhShrivastava1032/AgroTech#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.7",
+    "express": "^5.3.0",
+    "pg": "^8.23.1"
+  }
+}

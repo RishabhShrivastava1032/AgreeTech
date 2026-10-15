@@ -1,0 +1,130 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="SiFBBvEzDDcHM-K3qx0Y">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="fCFudctJVnQP-RA56WlN-9" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="190" width="770" x="40" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="fCFudctJVnQP-RA56WlN-10" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="65" width="170" x="70" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="fCFudctJVnQP-RA56WlN-11" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b style=&quot;&quot;&gt;Presentation Layer&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="147" x="352" y="47" as="geometry" />
+        </mxCell>
+        <mxCell id="fCFudctJVnQP-RA56WlN-12" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Farmer Dashboard&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;and&amp;nbsp;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Search View&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="147" x="80" y="95" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="60" width="170" x="310" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Owner Listing&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Management Module&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="147" x="323" y="103" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="60" width="220" x="547" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-4" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Admin Governance Console&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;(KYC and Listings Verification&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="200" x="560" y="101" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="37" width="220" x="70" y="178" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-6" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Interactive map component&lt;/font&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="190" x="80" y="184" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="39" width="220" x="553" y="176" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-8" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Booking, Rental Recipt and Invoice Interface" vertex="1">
+          <mxGeometry height="30" width="190" x="569" y="182" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-9" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="233" width="770" x="39" y="317" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-10" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Application (Backend)" vertex="1">
+          <mxGeometry height="30" width="120" x="340" y="319" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-17" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="181" width="750" x="50" y="349" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-18" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="node.js express rest API" vertex="1">
+          <mxGeometry height="30" width="141" x="327" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-19" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="46" width="170" x="70" y="384" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-24" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Authentication and security&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="160" x="75" y="394" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-25" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Searching&lt;/font&gt;" vertex="1">
+          <mxGeometry height="37" width="130" x="328" y="390.5" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-26" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;Booking Engine&lt;/font&gt;" vertex="1">
+          <mxGeometry height="37" width="141" x="576" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-27" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 15px;&quot;&gt;Listing Management Controller&lt;/span&gt;" vertex="1">
+          <mxGeometry height="52" width="147" x="70" y="458" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-28" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 15px;&quot;&gt;Digital Agreement&amp;nbsp;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 15px;&quot;&gt;Execution Module&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="46" width="147" x="319.5" y="464" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-29" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;font-size: 15px;&quot;&gt;Admin Services&lt;/span&gt;" vertex="1">
+          <mxGeometry height="37" width="130" x="587" y="465.5" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-31" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="358" width="279.5" x="40" y="642" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-32" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;&lt;b&gt;Data and storage layer&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="170" x="104" y="643" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-33" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;&lt;b&gt;PostgreSQL Database&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Post GIS Extension&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;ul&gt;&lt;li&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;geography&lt;/font&gt;&lt;/li&gt;&lt;li&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;spatial&lt;/font&gt;&lt;/li&gt;&lt;li&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;user&lt;/font&gt;&lt;/li&gt;&lt;li&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Equipment&lt;/font&gt;&lt;/li&gt;&lt;li&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;specs&lt;/font&gt;&lt;/li&gt;&lt;li&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Booking&lt;/font&gt;&lt;/li&gt;&lt;li&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Agreement&lt;/font&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="197" width="240" x="60" y="673" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-34" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;&lt;b&gt;File and Document Storage&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;ul&gt;&lt;li&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Multi-angle Machine Photo&amp;nbsp;&lt;/font&gt;&lt;/li&gt;&lt;li&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;RC docs and Insurance Files&lt;/font&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="240" x="60" y="890" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-35" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div&gt;&lt;br&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="160" width="390" x="360" y="640" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-36" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;&lt;b&gt;Map API&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;ul&gt;&lt;li&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;Intractive Map tile rendering&amp;nbsp;&lt;/font&gt;&lt;/li&gt;&lt;li&gt;&lt;font style=&quot;font-size: 15px;&quot;&gt;pin placement and geocoding&lt;/font&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="98.5" width="350" x="380" y="673" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-37" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;&lt;b&gt;External Services Layer&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="180" x="485" y="640" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-38" edge="1" parent="1" source="fCFudctJVnQP-RA56WlN-9" style="endArrow=classic;html=1;rounded=0;fontFamily=Helvetica;fontSize=12;fontColor=default;exitX=0.486;exitY=1.003;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.617;entryY=-0.093;entryDx=0;entryDy=0;entryPerimeter=0;" target="ptOBjF_33dXfet-Ebp12-10" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="364" y="303" as="sourcePoint" />
+            <mxPoint x="414" y="253" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-39" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="HTTP / Rest API" vertex="1">
+          <mxGeometry height="30" width="120" x="408" y="262" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-40" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;fontFamily=Helvetica;fontSize=12;fontColor=default;exitX=0.486;exitY=1.003;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="ptOBjF_33dXfet-Ebp12-31" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="180" y="550" as="sourcePoint" />
+            <mxPoint x="180" y="635" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-41" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="SQL Quries" vertex="1">
+          <mxGeometry height="30" width="120" x="165" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-42" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;fontFamily=Helvetica;fontSize=12;fontColor=default;exitX=0.486;exitY=1.003;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="550" y="549" as="sourcePoint" />
+            <mxPoint x="550" y="641" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-43" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="HTTP Quries" vertex="1">
+          <mxGeometry height="30" width="120" x="537" y="574" as="geometry" />
+        </mxCell>
+        <mxCell id="ptOBjF_33dXfet-Ebp12-44" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;System Architecture Diagram&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="227" x="33" y="8" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
