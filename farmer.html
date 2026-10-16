@@ -9,39 +9,40 @@
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Local CSS -->
-     <link rel="stylesheet" href="farmer.css">
+    <link rel="stylesheet" href="demo.css">
 </head>
 <body>
     <div class="dashboard-container">
-        <!--side bar-->
+        <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="logo-area">
-                <i class="fa=solid fa-tractor"></i>
+            <div class="logo-block">
+                <i class="fa-solid fa-tractor"></i>
                 <div class="logo-text">
-                    <h3> Krishi</h3>
+                    <h3>Krishi</h3>
                     <span>Equip</span>
                 </div>
             </div>
-            <ul class="side-menu">
-            <li class="active"><a href="#"><i class="fa-solid fa-chart-pie"></i> Dashboard Overview</a></li>
-            <li > <a href="#"><i class="fa-solid fa-users"></i>Manage Users</a></li>
-            <li > <a href="#"><i class="fa-solid fa-boxes-stacked"></i>Equipment Inventry</a></li>
-            <li > <a href="#"><i class="fa-solid fa-calender-check"></i>Bookings</a></li>
-            <li > <a href="#"><i class="fa-solid fa-wallet"></i>Payment</a></li>
-            <li > <a href="#"><i class="fa-solid fa-chart-line"></i>Analytics</a></li>
+            <ul class="sidebar-menu">
+                <li class="active"><a href="#"><i class="fa-solid fa-chart-pie"></i> Dashboard Overview</a></li>
+                <li><a href="#"><i class="fa-solid fa-users"></i> Manage Users</a></li>
+                <li><a href="#"><i class="fa-solid fa-boxes-stacked"></i> Equipment Inventory</a></li>
+                <li><a href="#"><i class="fa-solid fa-calendar-check"></i> Bookings</a></li>
+                <li><a href="#"><i class="fa-solid fa-wallet"></i> Payments</a></li>
+                <li><a href="#"><i class="fa-solid fa-chart-line"></i> Analytics</a></li>
             </ul>
             <div class="sidebar-footer">
-                <img src="image/loginBackground.jpg" alt="field">
+                <img src="image/loginBackground.jpg" alt="Field">
             </div>
         </aside>
-        <!--main content area-->
+
+        <!-- Main Content Area -->
         <main class="main-content">
-            <!--top nave bar-->
-            <header class="top-nav">
-                <h2> FARMER DASHBOARD</h2>
+            <!-- Top Navbar -->
+            <header class="top-navbar">
+                <h2>FARMER DASHBOARD</h2>
                 <div class="search-bar">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder="Search for equipment">
+                    <input type="text" placeholder="Search equipment...">
                 </div>
                 <div class="user-nav">
                     <i class="fa-regular fa-bell"></i>
@@ -52,277 +53,82 @@
                     </div>
                 </div>
             </header>
-            <!--dashboard-->
-            <div class="dashboard-area">
-                <!--Equipment catalog-->
+
+            <!-- Dashboard Grid -->
+            <div class="dashboard-grid">
+                <!-- Left Section: Equipment Catalog -->
                 <section class="equipment-section">
                     <div class="section-header">
-                        <h3 > Equipments</h3>
-                        <div class="filter-button">
-                            <button class="button-filter">Tractor <i class="fa-solid fa-chevron-down"></i></button>
-                            <button class="button-filter"> Harvester <i class="fa-solid fa-chevron-down"></i></button>
-                            <button class="button-filter"> <i class="fa-solid fa-filter"></i>Filters</button>
+                        <h3>Equipment</h3>
+                        <div class="filter-buttons">
+                            <button class="btn-filter active">Tractors <i class="fa-solid fa-chevron-down"></i></button>
+                            <button class="btn-filter">Harvesters <i class="fa-solid fa-chevron-down"></i></button>
+                            <button class="btn-filter"><i class="fa-solid fa-filter"></i> Filters</button>
                         </div>
                     </div>
 
                     <div class="equipment-grid">
-                        <!--card 1-->
-                        <div class="equipment-card">
-                            <div class="equipment-image" style="background-color:  #ffebee;"><i class="fa-solid fa-tractor" style="font-size: 50px; color: #d32f2f;"></i></div>
-                            <div class="equipment-details">
+                        <!-- Card 1 -->
+                        <div class="eq-card">
+                            <div class="eq-img" style="background-color: #ffebee;"><i class="fa-solid fa-tractor" style="font-size: 50px; color: #d32f2f;"></i></div>
+                            <div class="eq-details">
                                 <h4>Tractors</h4>
-                                <p>Land Preparation</p>
+                                <p>Farming Equipment</p>
                                 <span class="badge">Available</span>
-                                <div class="equipment-footer">
+                                <div class="eq-footer">
                                     <span class="price">Rental Price</span>
-                                    <button class="button-details"></button>
+                                    <button class="btn-green">View Details</button>
                                 </div>
                             </div>
                         </div>
-                        <!--card 2-->
-                        <div class="equipment-card">
-                            <div class="equipment-image" style="background-color:  #ffebee;"><i class="fa-solid fa-tractor" style="font-size: 50px; color: #d32f2f;"></i></div>
-                            <div class="equipment-details">
-                                <h4>Power Tiller</h4>
-                                <p>Land Prepration</p>
+                        <!-- Card 2 -->
+                        <div class="eq-card">
+                            <div class="eq-img" style="background-color: #e8f5e9;"><i class="fa-solid fa-seedling" style="font-size: 50px; color: #2e7d32;"></i></div>
+                            <div class="eq-details">
+                                <h4>Harvesters</h4>
+                                <p>Farming Equipment</p>
                                 <span class="badge">Available</span>
-                                <div class="equipment-footer">
+                                <div class="eq-footer">
                                     <span class="price">Rental Price</span>
-                                    <button class="button-details"></button>
+                                    <button class="btn-green">View Details</button>
                                 </div>
                             </div>
                         </div>
-                        <!--card 3-->
-                        <div class="equipment-card">
-                            <div class="equipment-image" style="background-color:  #ffebee;"><i class="fa-solid fa-tractor" style="font-size: 50px; color: #d32f2f;"></i></div>
-                            <div class="equipment-details">
-                                <h4>UTVs / ATVs</h4>
-                                <p>Land Prepration</p>
-                                <span class="badge">Available</span>
-                                <div class="equipment-footer">
-                                    <span class="price">Rental Price</span>
-                                    <button class="button-details"></button>
-                                </div>
-                            </div>
+                    </div>
+                </section>
+
+                <!-- Right Section: Bookings & Support -->
+                <aside class="right-sidebar">
+                    <div class="card-box">
+                        <h4>My Bookings</h4>
+                        <div class="booking-item">
+                            <div><i class="fa-solid fa-calendar"></i> Farmer / 2026</div>
+                            <span class="status-otp">Get OTP</span>
                         </div>
-                        <!--card 4-->
-                        <div class="equipment-card">
-                            <div class="equipment-image" style="background-color:  #ffebee;"><i class="fa-solid fa-tractor" style="font-size: 50px; color: #d32f2f;"></i></div>
-                            <div class="equipment-details">
-                                <h4>Plow</h4>
-                                <p>Land Prepration</p>
-                                <span class="badge">Available</span>
-                                <div class="equipment-footer">
-                                    <span class="price">Rental Price</span>
-                                    <button class="button-details"></button>
-                                </div>
-                            </div>
+                        <div class="booking-item">
+                            <div><i class="fa-solid fa-calendar"></i> Farmer / 2026</div>
+                            <span class="status-otp">Get OTP</span>
                         </div>
-                        <!--card 5-->
-                        <div class="equipment-card">
-                            <div class="equipment-image" style="background-color:  #ffebee;"><i class="fa-solid fa-tractor" style="font-size: 50px; color: #d32f2f;"></i></div>
-                            <div class="equipment-details">
-                                <h4>Harrow</h4>
-                                <p>Land Prepration</p>
-                                <span class="badge">Available</span>
-                                <div class="equipment-footer">
-                                    <span class="price">Rental Price</span>
-                                    <button class="button-details"></button>
-                                </div>
-                            </div>
-                        </div>
-                        <!--card 6-->
-                        <div class="equipment-card">
-                            <div class="equipment-image" style="background-color:  #ffebee;"><i class="fa-solid fa-tractor" style="font-size: 50px; color: #d32f2f;"></i></div>
-                            <div class="equipment-details">
-                                <h4>Rotavator</h4>
-                                <p>Land Prepration</p>
-                                <span class="badge">Available</span>
-                                <div class="equipment-footer">
-                                    <span class="price">Rental Price</span>
-                                    <button class="button-details"></button>
-                                </div>
-                            </div>
-                        </div>
-                        <!--card 7-->
-                        <div class="equipment-card">
-                            <div class="equipment-image" style="background-color:  #ffebee;"><i class="fa-solid fa-tractor" style="font-size: 50px; color: #d32f2f;"></i></div>
-                            <div class="equipment-details">
-                                <h4>Cultivator</h4>
-                                <p>Land Prepration</p>
-                                <span class="badge">Available</span>
-                                <div class="equipment-footer">
-                                    <span class="price">Rental Price</span>
-                                    <button class="button-details"></button>
-                                </div>
-                            </div>
-                        </div>
-                        <!--card 8-->
-                        <div class="equipment-card">
-                            <div class="equipment-image" style="background-color:  #ffebee;"><i class="fa-solid fa-tractor" style="font-size: 50px; color: #d32f2f;"></i></div>
-                            <div class="equipment-details">
-                                <h4>Seed Drill / Planter</h4>
-                                <p>Sowing & Planting</p>
-                                <span class="badge">Available</span>
-                                <div class="equipment-footer">
-                                    <span class="price">Rental Price</span>
-                                    <button class="button-details"></button>
-                                </div>
-                            </div>
-                        </div>
-                        <!--card 9-->
-                        <div class="equipment-card">
-                            <div class="equipment-image" style="background-color:  #ffebee;"><i class="fa-solid fa-tractor" style="font-size: 50px; color: #d32f2f;"></i></div>
-                            <div class="equipment-details">
-                                <h4>Broadcast Seeder</h4>
-                                <p>Sowing & Planting</p>
-                                <span class="badge">Available</span>
-                                <div class="equipment-footer">
-                                    <span class="price">Rental Price</span>
-                                    <button class="button-details"></button>
-                                </div>
-                            </div>
-                        </div>
-                        <!--card 10-->
-                        <div class="equipment-card">
-                            <div class="equipment-image" style="background-color:  #ffebee;"><i class="fa-solid fa-tractor" style="font-size: 50px; color: #d32f2f;"></i></div>
-                            <div class="equipment-details">
-                                <h4>Transplanter</h4>
-                                <p>Sowing & Planting</p>
-                                <span class="badge">Available</span>
-                                <div class="equipment-footer">
-                                    <span class="price">Rental Price</span>
-                                    <button class="button-details"></button>
-                                </div>
-                            </div>
-                        </div>
-                        <!--card 11-->
-                        <div class="equipment-card">
-                            <div class="equipment-image" style="background-color:  #ffebee;"><i class="fa-solid fa-tractor" style="font-size: 50px; color: #d32f2f;"></i></div>
-                            <div class="equipment-details">
-                                <h4>Sprayer</h4>
-                                <p>Crop Protection & Irrigation </p>
-                                <span class="badge">Available</span>
-                                <div class="equipment-footer">
-                                    <span class="price">Rental Price</span>
-                                    <button class="button-details"></button>
-                                </div>
-                            </div>
-                        </div>
-                        <!--card 12-->
-                        <div class="equipment-card">
-                            <div class="equipment-image" style="background-color:  #ffebee;"><i class="fa-solid fa-tractor" style="font-size: 50px; color: #d32f2f;"></i></div>
-                            <div class="equipment-details">
-                                <h4>Fertilizer Spreader</h4>
-                                <p>Crop Protection & Irrigation</p>
-                                <span class="badge">Available</span>
-                                <div class="equipment-footer">
-                                    <span class="price">Rental Price</span>
-                                    <button class="button-details"></button>
-                                </div>
-                            </div>
-                        </div>
-                        <!--card 13-->
-                        <div class="equipment-card">
-                            <div class="equipment-image" style="background-color:  #ffebee;"><i class="fa-solid fa-tractor" style="font-size: 50px; color: #d32f2f;"></i></div>
-                            <div class="equipment-details">
-                                <h4>Irrigation Systems</h4>
-                                <p>Crop Protection & Irrigation</p>
-                                <span class="badge">Available</span>
-                                <div class="equipment-footer">
-                                    <span class="price">Rental Price</span>
-                                    <button class="button-details"></button>
-                                </div>
-                            </div>
-                        </div>
-                        <!--card 14-->
-                        <div class="equipment-card">
-                            <div class="equipment-image" style="background-color:  #ffebee;"><i class="fa-solid fa-tractor" style="font-size: 50px; color: #d32f2f;"></i></div>
-                            <div class="equipment-details">
-                                <h4>Combine Harvester</h4>
-                                <p>Harvesting & Post-Harvest</p>
-                                <span class="badge">Available</span>
-                                <div class="equipment-footer">
-                                    <span class="price">Rental Price</span>
-                                    <button class="button-details"></button>
-                                </div>
-                            </div>
-                        </div>
-                        <!--card 15-->
-                        <div class="equipment-card">
-                            <div class="equipment-image" style="background-color:  #ffebee;"><i class="fa-solid fa-tractor" style="font-size: 50px; color: #d32f2f;"></i></div>
-                            <div class="equipment-details">
-                                <h4>Baler</h4>
-                                <p>Harvesting & Post-Harvest</p>
-                                <span class="badge">Available</span>
-                                <div class="equipment-footer">
-                                    <span class="price">Rental Price</span>
-                                    <button class="button-details"></button>
-                                </div>
-                            </div>
-                        </div>
-                        <!--card 16-->
-                        <div class="equipment-card">
-                            <div class="equipment-image" style="background-color:  #ffebee;"><i class="fa-solid fa-tractor" style="font-size: 50px; color: #d32f2f;"></i></div>
-                            <div class="equipment-details">
-                                <h4>Thresher / Winnower</h4>
-                                <p>Harvesting & Post-Harvest</p>
-                                <span class="badge">Available</span>
-                                <div class="equipment-footer">
-                                    <span class="price">Rental Price</span>
-                                    <button class="button-details"></button>
-                                </div>
-                            </div>
-                        </div>
-                        <!--card 17-->
-                        <div class="equipment-card">
-                            <div class="equipment-image" style="background-color:  #ffebee;"><i class="fa-solid fa-tractor" style="font-size: 50px; color: #d32f2f;"></i></div>
-                            <div class="equipment-details">
-                                <h4>Grain Dryer</h4>
-                                <p>Harvesting & Post-Harvest</p>
-                                <span class="badge">Available</span>
-                                <div class="equipment-footer">
-                                    <span class="price">Rental Price</span>
-                                    <button class="button-details"></button>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-                        </section>
-                        
-                        <!--booking and support-->
-                        <aside class="right-sidebar">
-                            <div class="card-box">
-                                <h4>My Bokkings</h4>
-                                <div class="booking-iteam">
-                                    <div><i class="fa-solid fa-calander"></i> Farmer / 2026</div>
-                                    <span class="status-otp"> Get OTP</span>
-                                </div>
-                                <div class="booking-item">
-                                    <div><i class="fa-solid fa-calander"></i> Farmer / 2026</div>
-                                    <span class="status-OTP">Get OTP</span>
-                                </div>
-                            </div>
-                            <div class="card-box">
-                                <h4>Payment History</h4>
-                                <div class="Payment-item">
-                                    <i class="fa-solid fa-receipt"></i>
-                                </div>
+                    </div>
+
+                    <div class="card-box">
+                        <h4>Payment History</h4>
+                        <div class="payment-item">
+                            <i class="fa-solid fa-receipt"></i>
+                            <div>
                                 <p>Payment Successful</p>
                                 <small>Tractor Rental</small>
                             </div>
-                            </div>
-                            </div>
-                            <div class="card-box">
-                                <h4>Support</h4>
-                                <div class="support-item"><i class="fa-solid fa-phone"></i> Call Support</div>
-                                <div class="support-item"><i class="fa-solid fa-headset"></i> Connect to support</div>
-                            </div>
-
-                        </aside>
-                          
+                        </div>
                     </div>
-                
+
+                    <div class="card-box">
+                        <h4>Support</h4>
+                        <div class="support-item"><i class="fa-solid fa-phone"></i> Call Support</div>
+                        <div class="support-item"><i class="fa-solid fa-headset"></i> Connect to Support</div>
+                    </div>
+                </aside>
+            </div>
         </main>
     </div>
 </body>
