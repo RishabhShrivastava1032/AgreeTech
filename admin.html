@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - KrishiEquip</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <!--sidebar-->
+    <aside class="sidebar">
+        <div>
+            <div class="brand">
+                <i class="fa-solid fa-wheat-awn"></i>KrishiEquip
+            </div>
+            <ul class="menu">
+                <li><a href="#"><i class="fa-solid fa-chart-line"></i>Dashboard</a></li>
+                <li><a href="#"><i class="fa-solid fa-tractor"></i> Equipments</a></li>
+                <li><a href="#"><i class="fa-solid fa-users"></i>Users (farmer/Provider)</a></li>
+                <li><a href="#"><i class="fa-solid fa-calender-check"></i>Bookings</a></li>
+                <li><a href="#"><i class="fa-solid fa-file-invoice-doller"></i>Payments</a></li>
+            </ul>
+        </div>
+        <div class="sidebar-footer">
+            <a href="#" class="logout-button"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+        </div>
+    </aside>
+
+    <!--main content area-->
+    <main class="main-content">
+        <!--headder-->
+        <header class="header">
+            <h2>Admin Overview</h2>
+            <div class="user-profile">
+                <i class="fa-solid fa-user-gear"></i>
+                <span>Super Admin</span>
+            </div>
+        </header>
+        <!--stat cards-->
+        <section class="stat-seaction">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+                <div class="stat-information">
+                    <h3>1250</h3>
+                    <p>Total Users</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-tractor"></i></div>
+                <div class="stat-information">
+                    <h3>340</h3>
+                    <p>Active Equipment</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-calander-check"></i></div>
+                <div class="stat-information">
+                    <h3>89</h3>
+                    <p>Active Rentals</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+                <div class="stat-information">
+                    <h3>Rs 42500</h3>
+                    <p>Total Revanue</p>
+                </div>
+            </div>
+        </section>
+        <!--Equipment Approval table-->
+        <section class="table-section">
+            <div class="table-header">
+                <h3>Pending Approvels Of Equipment</h3>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Equipment name</th>
+                        <th>Owner Name</th>
+                        <th>Category</th>
+                        <th>Rate/Day</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mahindra Tractor</td>
+                        <td>Ramesh Kumar</td>
+                        <td>Tractor</td>
+                        <td>Rs1200</td>
+                        <td><span class="status-badge pending">Pendings</span></td>
+                        <td>
+                            <button class="button-action button-approve">Approve</button>
+                            <button class="button-action button-reject">Reject</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Mahindra Tractor</td>
+                        <td>Ramesh Kumar</td>
+                        <td>Tractor</td>
+                        <td>Rs1200</td>
+                        <td><span class="status-badge pending">Pendings</span></td>
+                        <td>
+                            <button class="button-action button-approve">Approve</button>
+                            <button class="button-action button-reject">Reject</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <!--recent booking table-->
+        <section class="table-section">
+            <div class="table-header">
+                <h3>Recent Bookings</h3>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Farmer Name</th>
+                        <th>Equipment</th>
+                        <th>Duration</th>
+                        <th>Total Amount</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td>#KE-192</td>
+                    <td>Vikram Patel</td>
+                    <td>Combine Harvestor</td>
+                    <td>3 Days</td>
+                    <td>5,000</td>
+                    <td><span class="status-badge approved">Approved</span></td>
+                </tr>
+                <tr>
+                    <td>#KE-192</td>
+                    <td>Vikram Patel</td>
+                    <td>Combine Harvestor</td>
+                    <td>3 Days</td>
+                    <td>5,000</td>
+                    <td><span class="status-badge approved">Approved</span></td>
+                </tr>
+            </table>
+        </section>
+    </main>
+</body>
+</html>
