@@ -23,5 +23,141 @@
             </ul>
         </div>
     </aside>
+
+    <!--main area-->
+    <main class="main-section">
+        <!--headder-->
+        <header class="header-section">
+            <div>
+                <h2>Equipment Provider Section</h2>
+                <p style="color: #666; font-size: 14px;">Welcome Back </p>
+            </div>
+            <button class="button-add-equipment">
+                <i class="fa-solid fa-plus"> Add new Equipment</i>
+            </button>
+        </header>
+        <!--stats Overview-->
+        <section class="stat-section">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-tractor"></i></div>
+                <div stat-information>
+                    <h3>5</h3>
+                    <p>Total Equipment</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-clock"></i></div>
+                <div stat-information>
+                    <h3>2</h3>
+                    <p>Currently Rented</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-handshake"></i></div>
+                <div stat-information>
+                    <h3>12</h3>
+                    <p>Total Bookings</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+                <div stat-information>
+                    <h3>RS 56,000</h3>
+                    <p>Total Earnings</p>
+                </div>
+            </div>
+        </section>
+        <!--my equipment list-->
+        <h3 class="section-title">My Listed Equipments</h3>
+        <section class="equipment-grid">
+            <!--card 1-->
+            <div class="equipment-card">
+                <div class="equipment-image" style="background-color: #e8f5e9;">
+                    <i class="fa-solid fa-tractor" style="font-size: 50px; color: #2e7d32;"></i>
+                </div>
+                <div class="equation-details">
+                    <h4>Tractor</h4>
+                    <p>Tillage and heavy operations</p>
+                    <span class="badge active"> Available</span>
+                    <div class="equipment-footer">
+                        <span class="price">Rs 1500 / day</span>
+                        <button class="button-edit"><i fa-solid fa-pen></i>Edit</button>
+                    </div>
+                </div>
+            </div>
+            <!--card 2-->
+            <div class="eq-card">
+                <div class="eq-img" style="background-color: #e3f2fd;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#1976d2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="7" y="6" width="10" height="14" rx="2" fill="#ffffff" stroke="#1976d2" stroke-width="2"/>
+                        <path d="M10 6V4h4v2"/>
+                        <path d="M17 12h2l1-6h-3"/>
+                        <circle cx="20" cy="5" r="1" fill="#1976d2"/>
+                        <path d="M7 16c-2 0-3-2-2-4"/>
+                    </svg>
+                </div>
+                <div class="eq-details">
+                    <h4>16L Battery Sprayer</h4>
+                    <p>Crop Protection</p>
+                    <span class="badge rented">Currently Rented</span>
+                    <div class="eq-footer">
+                        <span class="price">₹500 / day</span>
+                        <button class="btn-edit"><i class="fa-solid fa-pen"></i> Edit</button>
+                    </div>
+                </div>
+            </div>
+            <!--card 3-->
+            <div class="eq-card">
+                <div class="eq-img" style="background-color: #fff3e0;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#e65100" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 6h14l-2 8H7l-2-8z" fill="#ffffff" stroke="#e65100" stroke-width="2"/>
+                        <path d="M8 14l-2 4h12l-2-4" />
+                        <circle cx="12" cy="18" r="2" fill="#e65100"/>
+                        <path d="M4 6h16" />
+                    </svg>
+                </div>
+                <div class="eq-details">
+                    <h4>Fertilizer Spreader</h4>
+                    <p>Nutrient Application</p>
+                    <span class="badge active">Available</span>
+                    <div class="eq-footer">
+                        <span class="price">₹600 / day</span>
+                        <button class="btn-edit"><i class="fa-solid fa-pen"></i> Edit</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="table-section">
+            <h3 class="section-title">Recent Rental Requests</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Farmer Name</th>
+                        <th>Equipment</th>
+                        <th>Booking dates</th>
+                        <th>Total Amount</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Suresh Patel</td>
+                        <td>Mahindra 575DI Tractor</td>
+                        <td>oct 22 - 24</td>
+                        <td>3,000 Rs</td>
+                        <td><span class="status-badge panding"> Pending Approvel</span></td>
+                    </tr>
+                    <tr>
+                        <td>Vikram Singh</td>
+                        <td>16L Batry Sprayer</td>
+                        <td>oct 18 - oct 19</td>
+                        <td>Rs 500</td>
+                        <td><span class="status-badge confirmed">Confirmed And Active</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+    </main>
 </body>
 </html>
