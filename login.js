@@ -98,10 +98,43 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
     //form submittion
-    document.getElementById("loginForm").addEventListener("submit", (e) => {
+    document.getElementById("loginForm").addEventListener("submit", async(e) => {
         e.preventDefault();
-        alert("Logged in Successfully.");
+        const emailOrMobile = document.getElementById("login-email").value.trim();
+        const password = document.getElementById("login-password").value.trim();
 
+        try{
+            const response = await fetch('http://localhost:5000/api/login', {
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ emailOrMobile, password })
+
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                alert("Login Successful!");
+
+                const role = data.user.role.toLowerCase();
+                if(role === 'farmer') {
+                    window.location.href = "farmer.html";
+                } else if (role === 'provider') {
+                    window.location.href = "provider.html";
+                } else if (role === 'admin') {
+                    window.location.href = "admin.html"
+                } else {
+                    window.location.href = "farmer.html";
+                }
+            } else {
+                alert(data.message || "Login failed!");
+            }
+        } catch (err) {
+            console.error("Error connecting to server:", err);
+            alert("Server error. Make sure backend is running.");
+        }
     });
 
     document.getElementById("registerForm").addEventListener("submit", async function (e) {

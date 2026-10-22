@@ -56,6 +56,48 @@ app.post('/api/register', async (req, resp) => {
 
     }
 });
+// User Login API
+app.post('/api/login', async (req, res) => {
+    try {
+        const { emailOrMobile, password } = req.body;
+
+        if (!emailOrMobile || !password) {
+            return res.status(400).json({ success: false, message: "Please fill in all fields!" });
+        }
+
+        // Find user by email or mobile
+        const userQuery = await pool.query(
+            "SELECT * FROM users WHERE email = $1 OR mobile = $1",
+            [emailOrMobile]
+        );
+
+        if (userQuery.rows.length === 0) {
+            return res.status(400).json({ success: false, message: "User not found!" });
+        }
+
+        const user = userQuery.rows[0];
+
+        // Check password
+        if (user.password !== password) {
+            return res.status(400).json({ success: false, message: "Invalid password!" });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Login Successful",
+            user: {
+                id: user.id,
+                full_name: user.full_name,
+                role: user.role,
+                email: user.email,
+                location: user.location
+            }
+        });
+    } catch (err) {
+        console.error("Login Route Error Details:", err.message); // Yeh terminal par exact error batayega
+        res.status(500).json({ success: false, message: "Server error during login: " + err.message });
+    }
+});
 
 //server
 const PORT = process.env.PORT || 5000;
