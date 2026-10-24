@@ -1,8 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Sidebar Active State Switching
+    const sidebarItems = document.querySelectorAll(".sidebar .menu li");
+    sidebarItems.forEach(item => {
+        item.addEventListener("click", () => {
+            sidebarItems.forEach(i => i.classList.remove("active"));
+            item.classList.add("active");
+        });
+    });
+    
     // 1. Live Search Bar Functionality
     const searchInput = document.querySelector(".search-bar input");
     const eqCards = document.querySelectorAll(".equipment-grid .eq-card");
-
+    
     if (searchInput) {
         searchInput.addEventListener("input", (e) => {
             const query = e.target.value.toLowerCase().trim();
@@ -10,7 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
             eqCards.forEach(card => {
                 const titleElement = card.querySelector("h4") || card.querySelector("h3");
                 const descElement = card.querySelector("p");
-                
                 const title = titleElement ? titleElement.textContent.toLowerCase() : "";
                 const desc = descElement ? descElement.textContent.toLowerCase() : "";
 
@@ -23,15 +31,28 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 2. Filter Buttons Toggle
+    // 2. Filter Equipment by Category
     const filterButtons = document.querySelectorAll(".btn-filter");
     filterButtons.forEach(btn => {
         btn.addEventListener("click", () => {
             filterButtons.forEach(b => b.classList.remove("active"));
             btn.classList.add("active");
+
+            const category = btn.textContent.trim().toLowerCase();
+            const cards = document.querySelectorAll(".equipment-grid .eq-card");
+
+            cards.forEach(card => {
+                const text =  card.textContent.toLowerCase();
+                if (category === "all" || text.includes(category)) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none"
+                }
+            });
         });
     });
-
+//------------------------------------------------------------start check from here ---------------------------------------------------------------------------------------
+//=======================================================================================================================================================================================
     // 3. Rent Now / View Details Interaction
     const actionButtons = document.querySelectorAll(".btn-green, .view-details-btn");
     actionButtons.forEach(btn => {
@@ -66,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
-    async function loadEquipments() {
+    async function loadEquipment() {
         try {
             const response = await fetch('http://localhost:5000/api/equipment');
             const data = await response.json();
@@ -76,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if(!equipmentListContainer) return;
                 equipmentListContainer.innerHTML=" ";
                 if(data.equipment.length === 0) {
-                    equipmentListContainer.innerHTML ="<p>No equipments available for the rent now.</p>";
+                    equipmentListContainer.innerHTML ="<p>No equipment available for the rent now.</p>";
                     return;
                 }
                 data.equipment.forEach(eq => {
@@ -99,5 +120,5 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("error connecting to the server", err);
         }
     }
-    leadEquipment();
+    loadEquipment();
 });
