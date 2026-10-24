@@ -99,6 +99,44 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
+//add equipment 
+app.post ('/api/equipment', async (req, resp) => {
+    try {
+        const { provider_id, equipment_name, category, price_per_day, location, description } = req.body;
+        const newEquipment = await pool.query (
+            `INSERT INTO equipments (provider_id, equipment_name, category, price_per_day, location, description, status)
+            VALUES ($1, $2, $3, $4, $5, $6, 'Pwnding')RETURNING *`,
+            [provider_id, equipment_name, category, price_per_day, location, description]
+        );
+        resp.status(201).json({
+            success: true,
+            message: "Equipment added succesfully and sent for the admin approvel!",
+            equipment: newEquipment.rows[0]
+        });
+    } catch (err) {
+        console.error ("Add equipment error:", err.message);
+        resp.status(500).json({ success: false, message: "Server Error while adding equipment."});
+
+    }
+})
+
+// get all approvel equipment API
+app.get('/api/equipment', async(req, resp) => {
+    try{
+        const equipment = await pool.query(
+            "SELECT * FROM equipment WHERE status = 'Approved' ORDER BY created_at DESC"
+
+        );
+        resp.status(200).json({
+            success: true,
+            equipment: equipment.rows
+        });
+    } catch(err) {
+        console.error("Fetch Equipment Error", err.message);
+        resp.status(500).json({ success: false, message:"Server error while fetching equipment."});
+    }
+})
+
 //server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

@@ -36,6 +36,38 @@
                 <i class="fa-solid fa-plus"> Add new Equipment</i>
             </button>
         </header>
+
+        <!-- Add New Equipment Form Section -->
+        <section style="background: #ffffff; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+            <h3 class="section-title">Add New Equipment</h3>
+            <form id="addEquipmentForm">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">Equipment Name</label>
+                        <input type="text" id="equipmentName" placeholder="e.g. Mahindra Tractor" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">Category</label>
+                        <input type="text" id="equipmentCategory" placeholder="e.g. Tillage" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">Price Per Day (₹)</label>
+                        <input type="number" id="equipmentPrice" placeholder="e.g. 1500" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">Location</label>
+                        <input type="text" id="equipmentLocation" placeholder="e.g. Indore" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                    </div>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500;">Description</label>
+                    <textarea id="equipmentDesc" placeholder="Enter equipment details..." rows="3" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                </div>
+                <button type="submit" style="background: #2e7d32; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: bold;">Submit for Approval</button>
+            </form>
+        </section>
         <!--stats Overview-->
         <section class="stat-section">
             <div class="stat-card">
