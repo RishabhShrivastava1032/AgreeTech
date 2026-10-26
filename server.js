@@ -2,6 +2,7 @@ const express = require ('express');
 const cors = require ('cors');
 const {Pool} = require ('pg');
 require ('dotenv').config();
+const nodemailer = require ('nodemailer');
 
 const app = express();
 app.use(express.json());
@@ -19,7 +20,53 @@ const pool = new Pool({
 pool.connect()
 .then(() => console.log('Connection to postgreSQL database successfully!'))
 .catch(err => console.error('Database connection error:',err.stack));
+// nodemailer
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL_USER || 'professionalrishabh10@gmail.com',
+        pass: process.env.EMAIL_PASS || 'sfkpcnturpkandtj'
+    }
+})
+// otp store in temp memory 
+const otpDatabase = {};
 
+//send otp email
+app.post('api/auth/send-otp',async (req, resp) => {
+    const { email } = req.body;
+
+    if(!email) {
+        return resp.status(400).json({ success: false, message: "Email is require feild!"});
+
+    }
+    // 6 digit otp 
+    constrandomOtp = Math.floor(100000 + Math.random() * 900000);
+    otpDatabase[email] = randomOtp;
+    const mailOption = {
+        from: process.env.EMAIL_USER || 'professionalrishabh10@gmail.com',
+        to: email,
+        subject: 'KrishiEquip - Verification OTP',
+        text: `this is automatic generated mail your krishiEquip OTP is ${randomOtp}. this is vailed for 5 minuts after 5 minuts this will expire. `
+    };
+    try {
+        await transporter.sendMail(mailOption);
+        resp.json({success: true, message: 'OTP sent successfully to your email.'})
+    } catch {
+        console.error("OTP email sending error", err);
+        resp.status(500).json({success: false, message: 'Server error in sending OTP!.'});
+    }
+})
+
+//verify otp 
+app.post('/api/auth/verify-otp', (req, resp) => {
+    const { email, otp } = req.body;
+    if(otpDatabase[email] && otpDatabase[email] == otp) {
+        delete otpDatabase[email];
+        resp.json({ success: true, message: 'OTP successfully verified!.'});
+    } else {
+        resp.status(400).json({ success:false, message: "Incorect OTP, Please try again!."});
+    }
+})
 //user registration API
 app.post('/api/register', async (req, resp) => {
     try{
