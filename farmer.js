@@ -1,12 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Sidebar Active State Switching
-    const sidebarItems = document.querySelectorAll(".sidebar .menu li");
+   
+    // Sidebar Menu & Section Switching Logic
+    const sidebarItems = document.querySelectorAll(".sidebar-menu li");
+    
     sidebarItems.forEach(item => {
-        item.addEventListener("click", () => {
+        item.addEventListener("click", (e) => {
+            e.preventDefault();
             sidebarItems.forEach(i => i.classList.remove("active"));
             item.classList.add("active");
+            const targetId = item.getAttribute("data-target");
+            if (targetId) {
+                console.log(`Switched to section: ${targetId}`);
+            }
         });
     });
+
     
     // 1. Live Search Bar Functionality
     const searchInput = document.querySelector(".search-bar input");
@@ -51,22 +59,19 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     });
-//------------------------------------------------------------start check from here ---------------------------------------------------------------------------------------
-//=======================================================================================================================================================================================
-    // 3. Rent Now / View Details Interaction
-    const actionButtons = document.querySelectorAll(".btn-green, .view-details-btn");
-    actionButtons.forEach(btn => {
-        btn.addEventListener("click", (e) => {
+    //Rent Now / View Details Interaction
+    document.addEventListener("click", (e) => {
+        if (e.target.classList.contains("button-green") || e.target.classList.contains("button-green") || e.target.classList.contains("view-details-btn")) {
             const card = e.target.closest(".eq-card");
             if (card) {
                 const titleElement = card.querySelector("h4") || card.querySelector("h3");
                 const eqName = titleElement ? titleElement.textContent.trim() : "Equipment";
                 alert(`Redirecting to booking & rental details for: ${eqName}`);
             }
-        });
+        }
     });
 
-    // 4. Get OTP Button Interaction in Bookings
+    // Get OTP Button Interaction in Bookings
     const otpButtons = document.querySelectorAll(".status-otp");
     otpButtons.forEach(otpBtn => {
         otpBtn.addEventListener("click", () => {
@@ -75,13 +80,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // 5. Support Section Interaction
+    //Support Section Interaction
     const supportItems = document.querySelectorAll(".support-item");
     supportItems.forEach(item => {
         item.addEventListener("click", (e) => {
             const actionText = e.currentTarget.textContent.trim();
             if (actionText.includes("Call Support")) {
-                alert("Connecting to KrishiEquip Helpline: +91 9876543210");
+                alert("Connecting to KrishiEquip Helpline: +91 7447019946");
             } else if (actionText.includes("Connect to Support")) {
                 alert("Opening live chat support with an agricultural expert...");
             }
@@ -104,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const card = document.createElement("div");
                     card.className = "eq-card";
                     card.innerHTML = `
-                    <h4>$ {eq.equipment_name}</h4>
+                    <h4>${eq.equipment_name}</h4>
                     <p><strong>category: </strong> ${eq.category}</p>
                     <p><strong>Location: </strong> ${eq.location}</p>
                     <p><strong>Price: </strong> ${eq.price_per_day}</p>

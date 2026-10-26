@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 tableBody.innerHTML = "";
 
                 if (data.equipments.length === 0) {
-                    tableBody.innerHTML = `<tr><td colspan="5" style="text-align:center;">No equipment requests found.</td></tr>`;
+                    tableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;">No equipment requests found.</td></tr>`;
                     return;
                 }
 
@@ -75,11 +75,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Initial load
-    loadAdminEquipments();
+    const logoutBtn = document.querySelector(".logout-button");
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", (e) => {
+            e.preventDefault();
             if (confirm("Are you sure you want to log out as Admin?")) {
                 alert("Logged out successfully.");
-                window.location.href = "login.html"; // Redirects back to login page
+                window.location.href = "login.html";
             }
         });
     }
