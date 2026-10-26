@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 equipment_name: document.querySelector("#equipmentName").value,
                 category: document.querySelector("#equipmentCategory").value,
                 price_per_day: document.querySelector("#equipmentPrice").value,
-                location: document.querySelector("equipmentLocation").value,
+                location: document.querySelector("#equipmentLocation").value,
                 description: document.querySelector("#equipmentDesc").value
             };
 
