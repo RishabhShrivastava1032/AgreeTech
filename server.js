@@ -32,7 +32,7 @@ const transporter = nodemailer.createTransport({
 const otpDatabase = {};
 
 //send otp email
-app.post('api/auth/send-otp',async (req, resp) => {
+app.post('/api/auth/send-otp',async (req, resp) => {
     const { email } = req.body;
 
     if(!email) {
@@ -40,7 +40,7 @@ app.post('api/auth/send-otp',async (req, resp) => {
 
     }
     // 6 digit otp 
-    constrandomOtp = Math.floor(100000 + Math.random() * 900000);
+    const randomOtp = Math.floor(100000 + Math.random() * 900000);
     otpDatabase[email] = randomOtp;
     const mailOption = {
         from: process.env.EMAIL_USER || 'professionalrishabh10@gmail.com',
@@ -51,7 +51,7 @@ app.post('api/auth/send-otp',async (req, resp) => {
     try {
         await transporter.sendMail(mailOption);
         resp.json({success: true, message: 'OTP sent successfully to your email.'})
-    } catch {
+    } catch (err){
         console.error("OTP email sending error", err);
         resp.status(500).json({success: false, message: 'Server error in sending OTP!.'});
     }
@@ -146,43 +146,87 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
-//add equipment 
-app.post ('/api/equipment', async (req, resp) => {
+//add equipments 
+app.post ('/api/equipments', async (req, resp) => {
     try {
-        const { provider_id, equipment_name, category, price_per_day, location, description } = req.body;
-        const newEquipment = await pool.query (
-            `INSERT INTO equipments (provider_id, equipment_name, category, price_per_day, location, description, status)
-            VALUES ($1, $2, $3, $4, $5, $6, 'Pwnding')RETURNING *`,
-            [provider_id, equipment_name, category, price_per_day, location, description]
+        const { provider_id, equipments_name, category, price_per_day, location, description } = req.body;
+        const newEquipments = await pool.query (
+            `INSERT INTO equipments (provider_id, equipments_name, category, price_per_day, location, description, status)
+            VALUES ($1, $2, $3, $4, $5, $6, 'Pending')RETURNING *`,
+            [provider_id, equipments_name, category, price_per_day, location, description]
         );
         resp.status(201).json({
             success: true,
-            message: "Equipment added succesfully and sent for the admin approvel!",
-            equipment: newEquipment.rows[0]
+            message: "Equipments added succesfully and sent for the admin approvel!",
+            equipments: newEquipments.rows[0]
         });
     } catch (err) {
-        console.error ("Add equipment error:", err.message);
-        resp.status(500).json({ success: false, message: "Server Error while adding equipment."});
+        console.error ("Add equipments error:", err.message);
+        resp.status(500).json({ success: false, message: "Server Error while adding equipments."});
 
     }
 })
 
 // get all approvel equipment API
-app.get('/api/equipment', async(req, resp) => {
+app.get('/api/equipments', async(req, resp) => {
     try{
-        const equipment = await pool.query(
-            "SELECT * FROM equipment WHERE status = 'Approved' ORDER BY created_at DESC"
+        const equipments = await pool.query(
+            "SELECT * FROM equipments WHERE status = 'Approved' ORDER BY created_at DESC"
 
         );
+
+        // Get All Bookings API
+        app.get('/api/bookings', async (req, res) => {
+            try {
+                const bookings = await pool.query('SELECT * FROM bookings ORDER BY created_at DESC');
+                res.json({ success: true, bookings: bookings.rows });
+                } catch (err) {
+                    console.error("Fetch Bookings Error:", err.message);
+                    res.status(500).json({ success: false, message: "Server error while fetching bookings." });
+                }
+            });
         resp.status(200).json({
             success: true,
-            equipment: equipment.rows
+            equipments: equipments.rows
         });
     } catch(err) {
-        console.error("Fetch Equipment Error", err.message);
-        resp.status(500).json({ success: false, message:"Server error while fetching equipment."});
+        console.error("Fetch Equipments Error", err.message);
+        resp.status(500).json({ success: false, message:"Server error while fetching equipments."});
     }
 })
+
+// Save Rental Booking API
+app.post('/api/bookings', async (req, res) => {
+    try {
+        const { farmer_id, equipment_name, duration, total_amount } = req.body;
+        
+        const newBooking = await pool.query(
+            `INSERT INTO bookings (farmer_id, equipment_name, duration, total_amount, status)
+             VALUES ($1, $2, $3, $4, 'Confirmed') RETURNING *`,
+            [farmer_id || 1, equipment_name, duration, total_amount]
+        );
+
+        res.status(201).json({
+            success: true,
+            message: "Booking saved successfully!",
+            booking: newBooking.rows[0]
+        });
+    } catch (err) {
+        console.error("Booking Error:", err.message);
+        res.status(500).json({ success: false, message: "Server error while saving booking." });
+
+        // Get All Bookings API
+        app.get('/api/bookings', async (req, res) => {
+            try {
+                const bookings = await pool.query('SELECT * FROM bookings ORDER BY created_at DESC');
+                res.json({ success: true, bookings: bookings.rows });
+                } catch (err) {
+                    console.error("Fetch Bookings Error:", err.message);
+                    res.status(500).json({ success: false, message: "Server error while fetching bookings." });
+                }
+            });
+        }
+    });
 
 //server
 const PORT = process.env.PORT || 5000;

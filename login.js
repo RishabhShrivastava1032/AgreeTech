@@ -60,43 +60,76 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
     //send otp EventListners
-    otpSendButton.addEventListener("click", () => {
+    otpSendButton.addEventListener("click", async () => {
         const mobile = document.getElementById("registerMobile").value.trim();
         const email = document.getElementById("registerEmail").value.trim();
 
         if (!email || !mobile || mobile.length !== 10) {
-            alert("Plese fill in a vailed Email and 10-digit Mobile number");
+            alert("Please fill in a valid Email and 10-digit Mobile number");
             return;
         }
-        //otp sending
-        generateOtp ="123456";
-        alert(`OTP sent to ${mobile} and ${email}! (Simulated OTP: ${generateOtp})`)
 
-        //UI updates
-        otpVerifyBlock.hidden = false;
-        step2Circle.classList.add("active");
-        otpStatus.textContent = "OTP sent Successfully. Please enter the OTP ";
-        otpStatus.className = "otp-status-text success";
-    });
-    // verify otp eventListner
-    otpVerifyButton.addEventListener("click", () =>{
-        const enteredOtp = otpCodeInput.value.trim();
+        try {
+            const response = await fetch('http://localhost:5000/api/auth/send-otp', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email })
+            });
+            const data = await response.json();
 
-        if(enteredOtp === generateOtp) {
-            otpStatus.textContent = "✓ OTP verified Successfully!";
-            otpStatus.className = "otp-status-text success";
-
-            //enable submit button and update program
-            finalRegisterButton.disabled = false;
-            step3Circle.classList.add("active");
-            otpVerifyButton.disabled = true;
-            otpCodeInput.disabled = true;
-
-        } else {
-            otpStatus.textContent = "✕ Invalaid OTP. Please try again.";
-            otpStatus.className = "otp-status-text error";
+            if (data.success) {
+                alert(data.message);
+                //UI updates
+                otpVerifyBlock.hidden = false;
+                step2Circle.classList.add("active");
+                otpStatus.textContent = "OTP sent Successfully to your email. Please enter the OTP";
+                otpStatus.className = "otp-status-text success";
+            } else {
+                alert(data.message || "Failed to send OTP.");
+            }
+        } catch (err) {
+            console.error("Error sending OTP:", err);
+            alert("Server error while sending OTP.");
         }
     });
+
+    // verify otp eventListner
+    otpVerifyButton.addEventListener("click", async () => {
+        const email = document.getElementById("registerEmail").value.trim();
+        const enteredOtp = otpCodeInput.value.trim();
+
+        if (!enteredOtp) {
+            alert("Please enter the OTP.");
+            return;
+        }
+
+        try {
+            const response = await fetch('http://localhost:5000/api/auth/verify-otp', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, otp: enteredOtp })
+            });
+            const data = await response.json();
+
+            if (data.success) {
+                otpStatus.textContent = "✓ OTP verified Successfully!";
+                otpStatus.className = "otp-status-text success";
+
+                //enable submit button and update program
+                finalRegisterButton.disabled = false;
+                step3Circle.classList.add("active");
+                otpVerifyButton.disabled = true;
+                otpCodeInput.disabled = true;
+            } else {
+                otpStatus.textContent = "✕ Invalid OTP. Please try again.";
+                otpStatus.className = "otp-status-text error";
+            }
+        } catch (err) {
+            console.error("Error verifying OTP:", err);
+            alert("Server error while verifying OTP.");
+        }
+    });
+
     //form submittion
     document.getElementById("loginForm").addEventListener("submit", async(e) => {
         e.preventDefault();
