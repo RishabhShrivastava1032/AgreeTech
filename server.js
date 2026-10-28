@@ -149,11 +149,11 @@ app.post('/api/login', async (req, res) => {
 //add equipments 
 app.post ('/api/equipments', async (req, resp) => {
     try {
-        const { provider_id, equipments_name, category, price_per_day, location, description } = req.body;
+        const { provider_id, equipment_name, category, price_per_day, location, description } = req.body;
         const newEquipments = await pool.query (
-            `INSERT INTO equipments (provider_id, equipments_name, category, price_per_day, location, description, status)
+            `INSERT INTO equipments (provider_id, equipment_name, category, price_per_day, location, description, status)
             VALUES ($1, $2, $3, $4, $5, $6, 'Pending')RETURNING *`,
-            [provider_id, equipments_name, category, price_per_day, location, description]
+            [provider_id, equipment_name, category, price_per_day, location, description]
         );
         resp.status(201).json({
             success: true,
@@ -167,6 +167,36 @@ app.post ('/api/equipments', async (req, resp) => {
     }
 })
 
+// Get Provider Specific Equipments API
+app.get('/api/provider/equipments/:providerId', async (req, resp) => {
+    try {
+        const { providerId } = req.params;
+        const equipments = await pool.query(
+            "SELECT * FROM equipments WHERE provider_id = $1 ORDER BY created_at DESC",
+            [providerId]
+        );
+        resp.status(200).json({ success: true, equipments: equipments.rows });
+    } catch (err) {
+        console.error("Fetch Provider Equipments Error:", err.message);
+        resp.status(500).json({ success: false, message: "Server error while fetching provider equipments." });
+    }
+});
+
+// Get Provider Specific Equipments API
+app.get('/api/provider/equipments/:providerId', async (req, resp) => {
+    try {
+        const { providerId } = req.params;
+        const equipments = await pool.query(
+            "SELECT * FROM equipments WHERE provider_id = $1 ORDER BY created_at DESC",
+            [providerId]
+        );
+        resp.status(200).json({ success: true, equipments: equipments.rows });
+    } catch (err) {
+        console.error("Fetch Provider Equipments Error:", err.message);
+        resp.status(500).json({ success: false, message: "Server error while fetching provider equipments." });
+    }
+});
+
 // get all approvel equipment API
 app.get('/api/equipments', async(req, resp) => {
     try{
@@ -176,13 +206,13 @@ app.get('/api/equipments', async(req, resp) => {
         );
 
         // Get All Bookings API
-        app.get('/api/bookings', async (req, res) => {
+        app.get('/api/bookings', async (req, resp) => {
             try {
                 const bookings = await pool.query('SELECT * FROM bookings ORDER BY created_at DESC');
-                res.json({ success: true, bookings: bookings.rows });
+                resp.json({ success: true, bookings: bookings.rows });
                 } catch (err) {
                     console.error("Fetch Bookings Error:", err.message);
-                    res.status(500).json({ success: false, message: "Server error while fetching bookings." });
+                    resp.status(500).json({ success: false, message: "Server error while fetching bookings." });
                 }
             });
         resp.status(200).json({
@@ -195,34 +225,136 @@ app.get('/api/equipments', async(req, resp) => {
     }
 })
 
-// Save Rental Booking API
-app.post('/api/bookings', async (req, res) => {
+// 1. Get All Pending Equipments for Admin Panel
+app.get('/api/admin/pending-equipments', async (req, resp) => {
     try {
-        const { farmer_id, equipment_name, duration, total_amount } = req.body;
+        const query = `
+            SELECT e.*, u.full_name as owner_name 
+            FROM equipments e 
+            JOIN users u ON e.provider_id = u.id 
+            WHERE e.status = 'Pending' 
+            ORDER BY e.created_at DESC
+        `;
+        const result = await pool.query(query);
+        resp.status(200).json({ success: true, equipments: result.rows });
+    } catch (err) {
+        console.error("Fetch Pending Equipments Error:", err.message);
+        resp.status(500).json({ success: false, message: "Server error while fetching pending equipments." });
+    }
+});
+
+// 2. Update Equipment Status (Approve / Reject)
+app.put('/api/admin/equipment-status/:id', async (req, resp) => {
+    try {
+        const { id } = req.params;
+        const { status } = req.body; // 'Approved' ya 'Rejected'
+
+        const updateQuery = `
+            UPDATE equipments 
+            SET status = $1 
+            WHERE id = $2 
+            RETURNING *
+        `;
+        const result = await pool.query(updateQuery, [status, id]);
+
+        if (result.rows.length === 0) {
+            return resp.status(404).json({ success: false, message: "Equipment not found." });
+        }
+
+        resp.status(200).json({ 
+            success: true, 
+            message: `Equipment ${status} successfully!`, 
+            equipment: result.rows[0] 
+        });
+    } catch (err) {
+        console.error("Update Status Error:", err.message);
+        resp.status(500).json({ success: false, message: "Server error while updating status." });
+    }
+})
+
+// 1. Get Admin Dashboard Stats (Top 4 Cards)
+app.get('/api/admin/stats', async (req, resp) => {
+    try {
+        const usersCount = await pool.query("SELECT COUNT(*) FROM users");
+        const equipCount = await pool.query("SELECT COUNT(*) FROM equipments WHERE status = 'Approved'");
+        const rentalsCount = await pool.query("SELECT COUNT(*) FROM bookings WHERE status = 'Confirmed'");
+        const revenueQuery = await pool.query("SELECT SUM(total_amount) FROM bookings");
+
+        resp.status(200).json({
+            success: true,
+            totalUsers: usersCount.rows[0].count,
+            activeEquipment: equipCount.rows[0].count,
+            activeRentals: rentalsCount.rows[0].count,
+            totalRevenue: revenueQuery.rows[0].sum || 0
+        });
+    } catch (err) {
+        console.error("Stats Error:", err.message);
+        resp.status(500).json({ success: false, message: "Server error while fetching stats." });
+    }
+});
+
+// 2. Get All Users for Admin Management
+app.get('/api/admin/users', async (req, resp) => {
+    try {
+        const users = await pool.query("SELECT id, full_name, email, mobile, role, location FROM users ORDER BY id DESC");
+        resp.status(200).json({ success: true, users: users.rows });
+    } catch (err) {
+        console.error("Fetch Users Error:", err.message);
+        resp.status(500).json({ success: false, message: "Server error while fetching users." });
+    }
+});
+
+// 3. Delete User API (With Full Foreign Key Handling)
+app.delete('/api/admin/users/:id', async (req, resp) => {
+    try {
+        const { id } = req.params;
         
+        // 1. Delete related bookings first (if user is a farmer)
+        await pool.query("DELETE FROM bookings WHERE farmer_id = $1", [id]);
+        await pool.query("DELETE FROM equipments WHERE provider_id = $1", [id]);
+        const result = await pool.query("DELETE FROM users WHERE id = $1 RETURNING *", [id]);
+        if (result.rows.length === 0) {
+            return resp.status(404).json({ success: false, message: "User not found." });
+        }
+        resp.status(200).json({ success: true, message: "User and all related records deleted successfully!" });
+    } catch (err) {
+        console.error("Delete User Error:", err.message);
+        resp.status(500).json({ success: false, message: "Server error while deleting user: " + err.message });
+    }
+});
+
+// Save Rental Booking API
+app.post('/api/bookings', async (req, resp) => {
+    try {
+        console.log("RECEIVED REQ BODY:", req.body);
+        const farmerId = req.body.farmer_id || 1;
+        const eqName = req.body.equipments_name || req.body.equipment_name; 
+        const duration = req.body.duration;
+        const totalAmount = req.body.total_amount;
+
         const newBooking = await pool.query(
             `INSERT INTO bookings (farmer_id, equipment_name, duration, total_amount, status)
              VALUES ($1, $2, $3, $4, 'Confirmed') RETURNING *`,
-            [farmer_id || 1, equipment_name, duration, total_amount]
+            [farmerId, eqName, duration, totalAmount]
         );
 
-        res.status(201).json({
+        resp.status(201).json({
             success: true,
             message: "Booking saved successfully!",
             booking: newBooking.rows[0]
         });
     } catch (err) {
         console.error("Booking Error:", err.message);
-        res.status(500).json({ success: false, message: "Server error while saving booking." });
+        resp.status(500).json({ success: false, message: "Server error while saving booking." });
 
         // Get All Bookings API
-        app.get('/api/bookings', async (req, res) => {
+        app.get('/api/bookings', async (req, resp) => {
             try {
                 const bookings = await pool.query('SELECT * FROM bookings ORDER BY created_at DESC');
-                res.json({ success: true, bookings: bookings.rows });
+                resp.json({ success: true, bookings: bookings.rows });
                 } catch (err) {
                     console.error("Fetch Bookings Error:", err.message);
-                    res.status(500).json({ success: false, message: "Server error while fetching bookings." });
+                    resp.status(500).json({ success: false, message: "Server error while fetching bookings." });
                 }
             });
         }

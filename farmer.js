@@ -75,7 +75,7 @@ async function loadBookings() {
                 data.bookings.forEach(b => {
                     html += `
                         <div class="booking-item" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 13px;">
-                            <div><i class="fa-solid fa-calendar"></i> ${b.Equipments_name} (${b.duration} Days)</div>
+                            <div><i class="fa-solid fa-calendar"></i> ${b.equipments_name} (${b.duration} Days)</div>
                             <span class="status-otp" style="background:#e8f5e9; color:#2e7d32; padding:3px 8px; border-radius:4px; font-weight:600;">Confirmed</span>
                         </div>
                     `;
@@ -112,7 +112,7 @@ async function loadBookings() {
                 data.bookings.forEach(b => {
                     html += `
                         <div class="booking-item" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 13px;">
-                            <div><i class="fa-solid fa-calendar"></i> ${b.Equipments_name} (${b.duration} Days)</div>
+                            <div><i class="fa-solid fa-calendar"></i> ${b.equipments_name} (${b.duration} Days)</div>
                             <span class="status-otp" style="background:#e8f5e9; color:#2e7d32; padding:3px 8px; border-radius:4px; font-weight:600;">Confirmed</span>
                         </div>
                     `;
@@ -178,7 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         farmer_id: 1, // Session ya localStorage se ID le sakte hain
-                        Equipments_name: eqName,
+                        equipments_name: eqName,
                         duration: parseInt(duration),
                         total_amount: duration * 500 // Apne hisaab se calculation ya price set kar sakte hain
                     })
@@ -229,7 +229,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const card = document.createElement("div");
                     card.className = "eq-card";
                     card.innerHTML = `
-                    <h4>${eq.Equipments_name}</h4>
+                    <h4>${eq.equipments_name}</h4>
                     <p><strong>category: </strong> ${eq.category}</p>
                     <p><strong>Location: </strong> ${eq.location}</p>
                     <p><strong>Price: </strong> ${eq.price_per_day}</p>

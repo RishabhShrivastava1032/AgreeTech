@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
             };
 
             try {
-                const response = await fetch ('http://localhost:5000/api/equipment', {
+                const response = await fetch ('http://localhost:5000/api/equipments', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if(data.success) {
                     alert(data.message);
                     addEquipmentForm.reset();
+                    loadProviderEquipments();
 
                 } else {
                     alert(data.message || "Faiked to add equipment.");
@@ -68,4 +69,61 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+    // Function to Load Provider's Equipments Dynamically
+    async function loadProviderEquipments() {
+        try {
+            const provider_id = localStorage.getItem("user_id") || 1;
+            const response = await fetch(`http://localhost:5000/api/provider/equipments/${provider_id}`);
+            const data = await response.json();
+
+            if (data.success) {
+                const grid = document.querySelector(".equipment-grid");
+                if (!grid) return;
+
+                if (data.equipments.length === 0) {
+                    grid.innerHTML = "<p>No equipments added yet.</p>";
+                    return;
+                }
+
+                grid.innerHTML = "";
+                data.equipments.forEach(eq => {
+                    const card = document.createElement("div");
+                    card.className = "equipment-card";
+                    
+                    let badgeClass = "active";
+                    let badgeText = "Available";
+                    let badgeStyle = "";
+
+                    if (eq.status === 'Pending') {
+                        badgeStyle = "background: #fff3e0; color: #e65100;";
+                        badgeText = "Pending Approval";
+                    } else if (eq.status === 'Rented') {
+                        badgeClass = "rented";
+                        badgeText = "Currently Rented";
+                    }
+
+                    card.innerHTML = `
+                        <div class="equipment-image" style="background-color: #e8f5e9;">
+                            <i class="fa-solid fa-tractor" style="font-size: 50px; color: #2e7d32;"></i>
+                        </div>
+                        <div class="equipment-details">
+                            <h4>${eq.equipment_name}</h4>
+                            <p>${eq.category} - ${eq.location}</p>
+                            <span class="badge ${badgeClass}" style="${badgeStyle}">${badgeText}</span>
+                            <div class="equipment-footer">
+                                <span class="price">₹${eq.price_per_day} / day</span>
+                                <button class="button-edit"><i class="fa-solid fa-pen"></i> Edit</button>
+                            </div>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+        } catch (err) {
+            console.error("Error loading provider equipments:", err);
+        }
+    }
+
+    // Call on page load
+    loadProviderEquipments();
 });
