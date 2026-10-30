@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // 1. Live Search Bar Functionality
     const searchInput = document.querySelector(".search-bar input");
-    const eqCards = document.querySelectorAll(".Equipments-grid .eq-card");
+    const eqCards = document.querySelectorAll(".equipments-grid .eq-card");
     
     if (searchInput) {
         searchInput.addEventListener("input", (e) => {
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
             btn.classList.add("active");
 
             const category = btn.textContent.trim().toLowerCase();
-            const cards = document.querySelectorAll(".Equipments-grid .eq-card");
+            const cards = document.querySelectorAll(".equipments-grid .eq-card");
 
             cards.forEach(card => {
                 const text =  card.textContent.toLowerCase();
@@ -130,75 +130,77 @@ document.addEventListener("DOMContentLoaded", () => {
     loadBookings();
 });
 
-                // Rent Now / View Details Interaction (Fixed Class Matches)
+// Rent Now / View Details Interaction (Fixed Class Matches)
     document.addEventListener("click", (e) => {
-        // Check for all class variations: btn-green, button-green, view-details-btn
-        const btn = e.target.closest(".btn-green, .button-green, .view-details-btn");
-        if (btn) {
-            e.preventDefault();
-            const card = btn.closest(".eq-card");
-            if (card) {
-                const titleElement = card.querySelector("h4") || card.querySelector("h3");
-                const eqName = titleElement ? titleElement.textContent.trim() : "Equipment";
+// Check for all class variations: btn-green, button-green, view-details-btn
+    const btn = e.target.closest(".btn-green, .button-green, .view-details-btn");
+    if (btn) {
+    e.preventDefault();
+    const card = btn.closest(".eq-card");
+    if (card) {
+    const titleElement = card.querySelector("h4") || card.querySelector("h3");
+    const eqName = titleElement ? titleElement.textContent.trim() : "Equipment";
                 
-                // Modal elements update and display
-                const modalEqName = document.getElementById("modalEqName");
-                if (modalEqName) {
-                    modalEqName.textContent = `Rent: ${eqName}`;
-                }
+// Modal elements update and display
+    const modalEqName = document.getElementById("modalEqName");
+    if (modalEqName) {
+        modalEqName.textContent = `Rent: ${eqName}`;
+        }
                 
-                const modal = document.getElementById("rentalModal");
-                if (modal) {
-                    modal.style.display = "flex";
+        const modal = document.getElementById("rentalModal");
+            if (modal) {
+             modal.style.display = "flex";
                 }
             }
         }
     });
 
-    // Proceed to Payment Gateway & Save Booking to Database
-    document.getElementById("proceedToPayBtn")?.addEventListener("click", async () => {
-        const duration = document.getElementById("rentalDuration").value;
-        if (duration <= 0) {
-            alert("Please enter a valid duration!");
-            return;
-        }
+    // Enhanced Proceed to Payment Gateway & Save Payment + Booking
+ document.getElementById("proceedToPayBtn")?.addEventListener("click", async () => {
+     const duration = document.getElementById("rentalDuration")?.value || 1;
+     if (duration <= 0) {
+         alert("Please enter a valid duration!");
+         return;
+     }
 
-        // Equipments ka naam aur price modal se fetch karna
-        const modalTitle = document.getElementById("modalEqName").textContent;
-        const eqName = modalTitle.replace("Rent: ", "").trim();
-        
-        document.getElementById("rentalModal").style.display = "none";
-        const confirmPayment = confirm(`Opening secure Payment Gateway for KrishiEquip.\nRental Duration: ${duration} Unit(s).\nProceed with test payment?`);
-        
-        if (confirmPayment) {
-            try {
-                // Backend API call to save booking
-                const response = await fetch('http://localhost:5000/api/bookings', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        farmer_id: 1, // Session ya localStorage se ID le sakte hain
-                        equipments_name: eqName,
-                        duration: parseInt(duration),
-                        total_amount: duration * 500 // Apne hisaab se calculation ya price set kar sakte hain
-                    })
-                });
+     const modalTitle = document.getElementById("modalEqName")?.textContent || "Tractor";
+     const eqName = modalTitle.replace("Rent: ", "").replace("Rent Equipment", "").trim();
+     const totalAmount = duration * 500; // Ya apne price calculation ke mutabiq
 
-                const data = await response.json();
-                if (data.success) {
-                    alert("Payment Successful! Your booking has been confirmed and saved.");
-                    location.reload(); // Page refresh to update bookings list
-                } else {
-                    alert(data.message || "Failed to save booking.");
-                }
-            } catch (err) {
-                console.error("Error saving booking:", err);
-                alert("Server error during booking process.");
-            }
-        } else {
-            alert("Payment cancelled.");
-        }
-    });
+     // Modal hide karein
+     const modal = document.getElementById("rentalModal");
+     if (modal) modal.style.display = "none";
+
+     const selectedMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value || "UPI";
+     const loggedInUserId = localStorage.getItem("user_id") || 1;
+
+     try {
+         const response = await fetch('http://localhost:5000/api/payments/process', {
+             method: 'POST',
+             headers: { 'Content-Type': 'application/json' },
+             body: JSON.stringify({
+                 farmer_id: parseInt(loggedInUserId),
+                 equipment_name: eqName,
+                 duration: parseInt(duration),
+                 total_amount: totalAmount,
+                 payment_method: selectedMethod
+             })
+         });
+
+         const data = await response.json();
+         if (data.success) {
+             alert(` Payment Successful!\n\nTransaction ID: ${data.payment.transaction_id}\nAmount Paid: ₹${totalAmount}`);
+             location.reload(); // Refresh to update booking & payment history
+         } else {
+             alert(data.message || "Failed to process payment.");
+         }
+     } catch (err) {
+         console.error("Payment Submission Error:", err);
+         alert("Server error during payment process.");
+     }
+ });
+
+
 
     //Support Section Interaction
     const supportItems = document.querySelectorAll(".support-item");
@@ -218,26 +220,32 @@ document.addEventListener("DOMContentLoaded", () => {
             const data = await response.json();
 
             if ( data.success) {
-                const equipmentsListContainer = document.querySelector(".equipments-grid");
+                const equipmentsListContainer = document.querySelector(".equipment-grid");
                 if(!equipmentsListContainer) return;
                 equipmentsListContainer.innerHTML=" ";
                 if(data.equipments.length === 0) {
                     equipmentsListContainer.innerHTML ="<p>No equipments available for the rent now.</p>";
                     return;
                 }
-                data.equipments.forEach(eq => {
-                    const card = document.createElement("div");
-                    card.className = "eq-card";
-                    card.innerHTML = `
-                    <h4>${eq.equipments_name}</h4>
-                    <p><strong>category: </strong> ${eq.category}</p>
-                    <p><strong>Location: </strong> ${eq.location}</p>
-                    <p><strong>Price: </strong> ${eq.price_per_day}</p>
-                    <p>${eq.description || 'no description provided.'}</p>
-                    <button class="button-green">Rent Now </button>
-                    `;
-                    equipmentsListContainer.appendChild(card);
-                })
+data.equipments.forEach(eq => {
+    const card = document.createElement("div");
+    card.className = "eq-card"; // Yeh CSS ki original class hai
+    card.innerHTML = `
+        <div class="eq-img" style="background-color: #ffebee;">
+            <i class="fa-solid fa-tractor" style="font-size: 50px; color: #d32f2f;"></i>
+        </div>
+        <div class="eq-details">
+            <h4>${eq.equipment_name}</h4>
+            <p>${eq.category} - ${eq.location}</p>
+            <span class="badge">Available</span>
+            <div class="eq-footer">
+                <span class="price">₹${eq.price_per_day} / day</span>
+                <button class="button-green">Rent Now</button>
+            </div>
+        </div>
+    `;
+    equipmentsListContainer.appendChild(card);
+});
             }else {
                 console.error("Failed to fetch Equipments");
             }

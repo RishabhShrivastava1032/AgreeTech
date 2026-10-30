@@ -148,8 +148,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const data = await response.json();
 
-            if (data.success) {
+ if (data.success) {
                 alert("Login Successful!");
+
+                // Yahan user_id save karein taaki baaki pages par use ho sake
+                localStorage.setItem("user_id", data.user.id);
+                localStorage.setItem("user_role", data.user.role);
 
                 const role = data.user.role.toLowerCase();
                 if(role === 'farmer') {
@@ -157,11 +161,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 } else if (role === 'provider') {
                     window.location.href = "provider.html";
                 } else if (role === 'admin') {
-                    window.location.href = "admin.html"
+                    window.location.href = "admin.html";
                 } else {
                     window.location.href = "farmer.html";
                 }
-            } else {
+            }else {
                 alert(data.message || "Login failed!");
             }
         } catch (err) {

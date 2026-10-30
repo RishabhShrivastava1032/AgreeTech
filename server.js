@@ -182,39 +182,12 @@ app.get('/api/provider/equipments/:providerId', async (req, resp) => {
     }
 });
 
-// Get Provider Specific Equipments API
-app.get('/api/provider/equipments/:providerId', async (req, resp) => {
-    try {
-        const { providerId } = req.params;
-        const equipments = await pool.query(
-            "SELECT * FROM equipments WHERE provider_id = $1 ORDER BY created_at DESC",
-            [providerId]
-        );
-        resp.status(200).json({ success: true, equipments: equipments.rows });
-    } catch (err) {
-        console.error("Fetch Provider Equipments Error:", err.message);
-        resp.status(500).json({ success: false, message: "Server error while fetching provider equipments." });
-    }
-});
-
-// get all approvel equipment API
+// Get Approved Equipments API
 app.get('/api/equipments', async(req, resp) => {
     try{
         const equipments = await pool.query(
             "SELECT * FROM equipments WHERE status = 'Approved' ORDER BY created_at DESC"
-
         );
-
-        // Get All Bookings API
-        app.get('/api/bookings', async (req, resp) => {
-            try {
-                const bookings = await pool.query('SELECT * FROM bookings ORDER BY created_at DESC');
-                resp.json({ success: true, bookings: bookings.rows });
-                } catch (err) {
-                    console.error("Fetch Bookings Error:", err.message);
-                    resp.status(500).json({ success: false, message: "Server error while fetching bookings." });
-                }
-            });
         resp.status(200).json({
             success: true,
             equipments: equipments.rows
@@ -223,7 +196,18 @@ app.get('/api/equipments', async(req, resp) => {
         console.error("Fetch Equipments Error", err.message);
         resp.status(500).json({ success: false, message:"Server error while fetching equipments."});
     }
-})
+});
+
+//  Get All Bookings API ko yahan alag se bahar rakhein:
+app.get('/api/bookings', async (req, resp) => {
+    try {
+        const bookings = await pool.query('SELECT * FROM bookings ORDER BY created_at DESC');
+        resp.json({ success: true, bookings: bookings.rows });
+    } catch (err) {
+        console.error("Fetch Bookings Error:", err.message);
+        resp.status(500).json({ success: false, message: "Server error while fetching bookings." });
+    }
+});
 
 // 1. Get All Pending Equipments for Admin Panel
 app.get('/api/admin/pending-equipments', async (req, resp) => {
@@ -304,25 +288,6 @@ app.get('/api/admin/users', async (req, resp) => {
     }
 });
 
-// 3. Delete User API (With Full Foreign Key Handling)
-app.delete('/api/admin/users/:id', async (req, resp) => {
-    try {
-        const { id } = req.params;
-        
-        // 1. Delete related bookings first (if user is a farmer)
-        await pool.query("DELETE FROM bookings WHERE farmer_id = $1", [id]);
-        await pool.query("DELETE FROM equipments WHERE provider_id = $1", [id]);
-        const result = await pool.query("DELETE FROM users WHERE id = $1 RETURNING *", [id]);
-        if (result.rows.length === 0) {
-            return resp.status(404).json({ success: false, message: "User not found." });
-        }
-        resp.status(200).json({ success: true, message: "User and all related records deleted successfully!" });
-    } catch (err) {
-        console.error("Delete User Error:", err.message);
-        resp.status(500).json({ success: false, message: "Server error while deleting user: " + err.message });
-    }
-});
-
 // Save Rental Booking API
 app.post('/api/bookings', async (req, resp) => {
     try {
@@ -344,21 +309,69 @@ app.post('/api/bookings', async (req, resp) => {
             booking: newBooking.rows[0]
         });
     } catch (err) {
-        console.error("Booking Error:", err.message);
-        resp.status(500).json({ success: false, message: "Server error while saving booking." });
+        console.error("Booking Error Details:", err.message); // Yeh terminal par exact error batayega
+        resp.status(500).json({ success: false, message: "Server error while saving booking: " + err.message });
+    }
+});
 
-        // Get All Bookings API
-        app.get('/api/bookings', async (req, resp) => {
-            try {
-                const bookings = await pool.query('SELECT * FROM bookings ORDER BY created_at DESC');
-                resp.json({ success: true, bookings: bookings.rows });
-                } catch (err) {
-                    console.error("Fetch Bookings Error:", err.message);
-                    resp.status(500).json({ success: false, message: "Server error while fetching bookings." });
-                }
-            });
+// 1. Process Payment & Save Booking Transaction
+app.post('/api/payments/process', async (req, resp) => {
+    try {
+        const { farmer_id, equipment_name, duration, total_amount, payment_method } = req.body;
+
+        if (!farmer_id || !equipment_name || !total_amount || !payment_method) {
+            return resp.status(400).json({ success: false, message: "All fields are required!" });
         }
-    });
+
+        // Generate dynamic Transaction ID
+        const transactionId = "TXN-KE-" + Math.floor(100000 + Math.random() * 900000);
+
+        // Step A: Save to Bookings table
+        const bookingResult = await pool.query(
+            `INSERT INTO bookings (farmer_id, equipment_name, duration, total_amount, status)
+             VALUES ($1, $2, $3, $4, 'Confirmed') RETURNING *`,
+            [farmer_id, equipment_name, duration, total_amount]
+        );
+
+        const newBooking = bookingResult.rows[0];
+
+        // Step B: Save to Payments table
+        const paymentResult = await pool.query(
+            `INSERT INTO payments (booking_id, farmer_id, amount, payment_method, transaction_id, payment_status)
+             VALUES ($1, $2, $3, $4, $5, 'Success') RETURNING *`,
+            [newBooking.id, farmer_id, total_amount, payment_method, transactionId]
+        );
+
+        resp.status(201).json({
+            success: true,
+            message: "Payment successful and booking confirmed!",
+            booking: newBooking,
+            payment: paymentResult.rows[0]
+        });
+    } catch (err) {
+        console.error("Payment Processing Error:", err.message);
+        resp.status(500).json({ success: false, message: "Payment failed: " + err.message });
+    }
+});
+
+// 2. Fetch Payment History API
+app.get('/api/payments/history/:farmerId', async (req, resp) => {
+    try {
+        const { farmerId } = req.params;
+        const result = await pool.query(
+            `SELECT p.*, b.equipment_name, b.duration 
+             FROM payments p 
+             JOIN bookings b ON p.booking_id = b.id 
+             WHERE p.farmer_id = $1 
+             ORDER BY p.created_at DESC`,
+            [farmerId]
+        );
+        resp.status(200).json({ success: true, payments: result.rows });
+    } catch (err) {
+        console.error("Fetch Payment History Error:", err.message);
+        resp.status(500).json({ success: false, message: "Error fetching payment history." });
+    }
+});
 
 //server
 const PORT = process.env.PORT || 5000;
